@@ -79,6 +79,14 @@ export class User {
   @Column({ nullable: true, unique: true })
   referralCode?: string;
 
+  /** Daily XLM reward tracking - reset at midnight UTC */
+  @Column({ type: 'decimal', precision: 10, scale: 2, default: 0 })
+  dailyXlmEarned: number;
+
+  /** Date of last daily reward reset (YYYY-MM-DD in UTC) */
+  @Column({ type: 'date', nullable: true })
+  dailyRewardResetDate: string;
+
   @ManyToOne(() => User, { nullable: true })
   referredBy?: User;
 
